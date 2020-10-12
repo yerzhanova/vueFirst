@@ -2,17 +2,18 @@
   <div id="app">
       <h1>To do application</h1>
       <hr>
-      <ToDoList v-bind:todos="todos"></ToDoList>
+      <AddTodo/>
+      <ToDoList v-bind:todos="todos" @remove-todo="removeTodo"></ToDoList>
   </div>
 </template>
 
 <script>
 import ToDoList from '@/components/ToDoList';
+import AddTodo from '@/components/AddTodo';
+
 export default {
   name: 'App',
-  components: {
-  	ToDoList
-  },
+  components: { ToDoList, AddTodo },
     data(){
         return {
             todos: [
@@ -20,6 +21,11 @@ export default {
                 {id: 2, title: "buy oil", completed: false },
                 {id: 3, title: "buy beer", completed: false },
             ]
+        }
+    },
+    methods: {
+    	removeTodo(id) {
+    		this.todos = this.todos.filter(t => t.id !== id)
         }
     }
 }

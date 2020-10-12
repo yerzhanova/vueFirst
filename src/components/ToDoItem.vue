@@ -2,7 +2,7 @@
     <li>
         <span v-bind:class="{done: todo.completed}">
             <input type="checkbox" v-on:change="todo.completed = !todo.completed">
-            <strong>{{todo.id}}</strong>
+            <strong>{{id + 1}}</strong>
             {{todo.title}}
         </span>
         <button class="rm" v-on:click="$emit('remove-todo', todo.id)">&times;</button>
@@ -11,8 +11,11 @@
 <script>
     export default {
     	props:  {
-    		todo: Object,
-            required: true
+    		todo: {
+    		    type: Object,
+                required: true
+            },
+            id: Number
         }
     }
 </script>
